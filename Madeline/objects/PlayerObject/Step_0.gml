@@ -12,5 +12,11 @@ var _vertical_direction = KEY_DOWN - KEY_UP;
 var _horizontal_change = _move_speed*_horizontal_direction;
 var _vertical_change = _move_speed*_vertical_direction;
 
-x += _horizontal_change;
+if (!place_meeting(x + _horizontal_change, y, ColisionObjects))
+{
+	x += _horizontal_change;
+}
+if (!place_meeting(x, y + _vertical_change, ColisionObjects))
+{
 y+= _vertical_change;
+}

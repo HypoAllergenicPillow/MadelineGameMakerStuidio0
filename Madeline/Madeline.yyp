@@ -34,8 +34,10 @@
   },
   "name":"Madeline",
   "resources":[
+    {"id":{"name":"ColisionObjects","path":"objects/ColisionObjects/ColisionObjects.yy",},},
     {"id":{"name":"GroundObject","path":"objects/GroundObject/GroundObject.yy",},},
     {"id":{"name":"PlayerObject","path":"objects/PlayerObject/PlayerObject.yy",},},
+    {"id":{"name":"WaterObject","path":"objects/WaterObject/WaterObject.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
     {"id":{"name":"GroundSprite","path":"sprites/GroundSprite/GroundSprite.yy",},},
     {"id":{"name":"PlayerSprite","path":"sprites/PlayerSprite/PlayerSprite.yy",},},
