@@ -30,11 +30,12 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.6.0.157",
+    "IDEVersion":"2024.6.2.162",
   },
   "name":"Madeline",
   "resources":[
     {"id":{"name":"ColisionObjects","path":"objects/ColisionObjects/ColisionObjects.yy",},},
+    {"id":{"name":"GameObject","path":"objects/GameObject/GameObject.yy",},},
     {"id":{"name":"GroundObject","path":"objects/GroundObject/GroundObject.yy",},},
     {"id":{"name":"PlayerObject","path":"objects/PlayerObject/PlayerObject.yy",},},
     {"id":{"name":"WaterObject","path":"objects/WaterObject/WaterObject.yy",},},
