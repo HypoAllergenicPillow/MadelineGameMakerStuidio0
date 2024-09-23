@@ -17,6 +17,7 @@
     {"name":"Timelines","order":8,"path":"folders/Timelines.yy",},
   ],
   "ResourceOrderSettings":[
+    {"name":"BorderObject","order":5,"path":"objects/BorderObject/BorderObject.yy",},
     {"name":"ColisionObjects","order":2,"path":"objects/ColisionObjects/ColisionObjects.yy",},
     {"name":"GameObject","order":4,"path":"objects/GameObject/GameObject.yy",},
     {"name":"GroundObject","order":1,"path":"objects/GroundObject/GroundObject.yy",},

@@ -34,6 +34,7 @@
   },
   "name":"Madeline",
   "resources":[
+    {"id":{"name":"BorderObject","path":"objects/BorderObject/BorderObject.yy",},},
     {"id":{"name":"ColisionObjects","path":"objects/ColisionObjects/ColisionObjects.yy",},},
     {"id":{"name":"GameObject","path":"objects/GameObject/GameObject.yy",},},
     {"id":{"name":"GroundObject","path":"objects/GroundObject/GroundObject.yy",},},
