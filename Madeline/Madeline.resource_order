@@ -22,6 +22,8 @@
     {"name":"GameObject","order":4,"path":"objects/GameObject/GameObject.yy",},
     {"name":"GroundObject","order":1,"path":"objects/GroundObject/GroundObject.yy",},
     {"name":"WaterObject","order":3,"path":"objects/WaterObject/WaterObject.yy",},
+    {"name":"BorderSprite","order":16,"path":"sprites/BorderSprite/BorderSprite.yy",},
+    {"name":"BorderSprite1","order":4,"path":"sprites/BorderSprite1/BorderSprite1.yy",},
     {"name":"GroundSprite","order":1,"path":"sprites/GroundSprite/GroundSprite.yy",},
     {"name":"WaterSprite","order":3,"path":"sprites/WaterSprite/WaterSprite.yy",},
   ],

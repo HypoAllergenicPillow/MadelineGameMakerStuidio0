@@ -30,7 +30,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"BorderSprite1",
+    "path":"sprites/BorderSprite1/BorderSprite1.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }
