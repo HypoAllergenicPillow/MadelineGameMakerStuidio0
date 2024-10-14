@@ -9,7 +9,4 @@ if (place_meeting(x, y, PlayerObject)) {
             room_goto_next(); // Go to room 0 if this is the last room
         }
     }
-} else {
-    // Reset the touching flag if the player is no longer touching the spawn point
-    PlayerObject.touch_spawn = false;
 }

@@ -1,4 +1,4 @@
-if(PlayerObject.prevois_room < room)//Go to spawn in next room
+if(PlayerObject.previous_room <= room)//Go to spawn in next room
 {
 var spawnPoint = instance_find(SpawnObject,0);
 if(spawnPoint!=noone){
