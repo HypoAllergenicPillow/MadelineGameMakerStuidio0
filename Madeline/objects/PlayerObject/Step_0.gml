@@ -20,4 +20,3 @@ if (!place_meeting(x, y + _vertical_change, ColisionObjects))
 {
 y+= _vertical_change;
 }
-

@@ -1,17 +1,20 @@
 {
   "$GMObject":"",
-  "%Name":"GameObject",
+  "%Name":"StickObject",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"GameObject",
+  "name":"StickObject",
   "overriddenProperties":[],
   "parent":{
     "name":"Objects",
     "path":"folders/Objects.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"ItemObject",
+    "path":"objects/ItemObject/ItemObject.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -29,7 +32,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"StickSprite",
+    "path":"sprites/StickSprite/StickSprite.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }
