@@ -4,6 +4,9 @@
 #macro KEY_DOWN keyboard_check(ord("S"))
 #macro KEY_SPRINT keyboard_check(vk_lshift)
 
+#macro KEY_INTERACT keyboard_check(ord("E"))
+var key_interact_name = "E";
+
 var _move_speed = KEY_SPRINT == 1 ? sprint_speed : walk_speed;
 
 var _horizontal_direction = KEY_RIGHT - KEY_LEFT;
@@ -19,4 +22,19 @@ if (!place_meeting(x + _horizontal_change, y, ColisionObjects))
 if (!place_meeting(x, y + _vertical_change, ColisionObjects))
 {
 y+= _vertical_change;
+}
+
+// Overworld Item Interaction
+
+// Step Event of obj_player
+
+var nearestItem = instance_nearest(x, y, ItemObjects);
+if (nearestItem != noone) { // Item found
+    if (point_distance(x, y, nearestItem.x, nearestItem.y) <= interactionDistance) {
+        // Check for interaction
+        if (KEY_INTERACT) {
+            add_to_inventory(nearestItem.name); // Use item_name from Create Event
+            instance_destroy(nearestItem); // Remove the item
+        }
+    }
 }
