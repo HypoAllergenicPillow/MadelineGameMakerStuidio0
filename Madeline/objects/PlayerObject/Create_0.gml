@@ -19,3 +19,5 @@ function add_to_inventory(item) {
         ds_map_add(inventory, item, 1); // Add the item with a count of 1
     }
 }
+
+inventory_visible = false;

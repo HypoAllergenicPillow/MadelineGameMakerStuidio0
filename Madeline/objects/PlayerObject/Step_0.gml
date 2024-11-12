@@ -7,6 +7,11 @@
 #macro KEY_INTERACT keyboard_check(ord("E"))
 var key_interact_name = "E";
 
+#macro KEY_INVENTORY vk_tab
+if(keyboard_check_pressed(KEY_INVENTORY)){
+inventory_visible = !inventory_visible;
+}
+
 var _move_speed = KEY_SPRINT == 1 ? sprint_speed : walk_speed;
 
 var _horizontal_direction = KEY_RIGHT - KEY_LEFT;
