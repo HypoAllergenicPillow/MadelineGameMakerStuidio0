@@ -1,0 +1,10 @@
+camera_width = 640;
+camera_height = 360;
+camera_speed = 10;
+jittermantissa = 2;
+follow_target=instance_find(PlayerObject,0);
+x=follow_target.x;
+y=follow_target.y;
+x_to=x;
+y_to=y;
+current_room = room;
