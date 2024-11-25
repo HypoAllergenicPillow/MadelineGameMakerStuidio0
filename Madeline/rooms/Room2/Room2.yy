@@ -1159,8 +1159,8 @@
     {"name":"inst_4372F902","path":"rooms/Room2/Room2.yy",},
     {"name":"inst_22C6AD7E","path":"rooms/Room2/Room2.yy",},
     {"name":"inst_611D303","path":"rooms/Room2/Room2.yy",},
-    {"name":"inst_7B702A9F","path":"rooms/Room2/Room2.yy",},
     {"name":"inst_47D5DC78","path":"rooms/Room2/Room2.yy",},
+    {"name":"inst_7B702A9F","path":"rooms/Room2/Room2.yy",},
   ],
   "isDnd":false,
   "layers":[
