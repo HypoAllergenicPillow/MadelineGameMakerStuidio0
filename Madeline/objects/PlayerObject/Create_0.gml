@@ -5,8 +5,6 @@ sprint_speed = 8;
 
 //view_camera[0] = camera_create_view(0, 0, 640, 480, 0, PlayerObject)
 
-touch_spawn = true;
-previous_room = room_first;
 
 inventory = ds_map_create(); // Create a dictionary for the player inventory
 interactionDistance = 50;
@@ -21,3 +19,5 @@ function add_to_inventory(item) {
 }
 
 inventory_visible = false;
+
+instance_create_layer(x,y,"EntityLayer",CameraObject);
