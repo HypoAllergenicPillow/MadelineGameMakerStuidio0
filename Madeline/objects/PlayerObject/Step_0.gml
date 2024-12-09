@@ -38,8 +38,11 @@ if (nearestItem != noone) { // Item found
     if (point_distance(x, y, nearestItem.x, nearestItem.y) <= interactionDistance) {
         // Check for interaction
         if (KEY_INTERACT) {
-            add_to_inventory(nearestItem.name); // Use item_name from Create Event
+			if(add_to_inventory(nearestItem)){
+			// Use item_name from Create Event)
             instance_destroy(nearestItem); // Remove the item
+			
+			}
         }
     }
 }
