@@ -1,11 +1,11 @@
 {
   "$GMObject":"",
-  "%Name":"StickObject",
+  "%Name":"stickObject",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"StickObject",
+  "name":"stickObject",
   "overriddenProperties":[],
   "parent":{
     "name":"Objects",
@@ -33,8 +33,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"StickSprite",
-    "path":"sprites/StickSprite/StickSprite.yy",
+    "name":"stickSprite",
+    "path":"sprites/stickSprite/stickSprite.yy",
   },
   "spriteMaskId":null,
   "visible":true,

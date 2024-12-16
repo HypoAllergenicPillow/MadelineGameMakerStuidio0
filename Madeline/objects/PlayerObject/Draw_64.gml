@@ -1,13 +1,25 @@
+if(inventory_visible){
+	var x_start = 20;
+	var y_start = 20;
+	var current_x = x_start;
+	var current_y = y_start;
+	var current_row = 1;
+	var item_spacing = 5;
+	var item_size = 32;
 
-//var x_start = 20;
-//var y_start = 20;
-//var item_spacing = 5;
-//var item_size = 32;
-//for(var item = ds_map_find_first(inventory); not is_undefined(item);item = ds_map_find_next(inventory,item)
-//){
-//	if(inventory_visible == false){break;}
-//	var item_name = item;
-//	draw_text(x_start,y_start,item_name);
-//	x_start += item_size + item_spacing;
-//	y_start += item_size + item_spacing;
-//}
+	for(var item_index = 0;item_index < total_inventory; ++item_index)
+	{
+	
+		var _item = inventory[item_index];
+		var item_name = _item.name;
+		if(item_name == ""){break;}
+		draw_sprite(asset_get_index(item_name + "Sprite"),-1,current_x,current_y);
+		if(item_index + 1 >= current_row*row_length){
+			current_row += 1;
+			current_x = x_start;
+			current_y += item_size + item_spacing;
+		}else{
+			current_x += item_size + item_spacing; 
+		}
+	}
+}
