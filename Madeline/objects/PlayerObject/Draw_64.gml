@@ -6,6 +6,8 @@ if(inventory_visible){
 	var current_row = 1;
 	var item_spacing = 5;
 	var item_size = 32;
+//Horizontal size 32*12 + 11*5
+//Vertacal size 32*rows + 5*rows-1
 
 	for(var item_index = 0;item_index < total_inventory; ++item_index)
 	{
