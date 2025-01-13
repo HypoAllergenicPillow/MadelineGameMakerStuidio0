@@ -10,6 +10,11 @@ var key_interact_name = "E";
 #macro KEY_INVENTORY vk_tab
 if(keyboard_check_pressed(KEY_INVENTORY)){
 inventory_visible = !inventory_visible;
+if(inventory_visible){
+	instance_activate_object(inventory_display);
+}else{
+	instance_deactivate_object(inventory_display);
+}
 }
 
 var _move_speed = KEY_SPRINT == 1 ? sprint_speed : walk_speed;
