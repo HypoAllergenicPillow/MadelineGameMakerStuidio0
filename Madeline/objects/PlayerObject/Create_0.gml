@@ -1,4 +1,4 @@
-inventory_display = instance_create_layer(0,0,"UI",Obj_Inventory,{unlocked_rows: unlocked_rows});
+inventory_display = instance_create_layer(0,0,"UI",Obj_Inventory,{parent : id});
 instance_deactivate_object(inventory_display);
 
 horizontal_speed = 0;
