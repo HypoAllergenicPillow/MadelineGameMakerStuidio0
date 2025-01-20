@@ -26,6 +26,7 @@
     {"name":"ItemObjects","order":8,"path":"objects/ItemObjects/ItemObjects.yy",},
     {"name":"Obj_Inventory","order":15,"path":"objects/Obj_Inventory/Obj_Inventory.yy",},
     {"name":"rockObject","order":9,"path":"objects/rockObject/rockObject.yy",},
+    {"name":"SlotObject","order":16,"path":"objects/SlotObject/SlotObject.yy",},
     {"name":"SpawnObject","order":7,"path":"objects/SpawnObject/SpawnObject.yy",},
     {"name":"stickObject","order":10,"path":"objects/stickObject/stickObject.yy",},
     {"name":"TransitionsObject","order":6,"path":"objects/TransitionsObject/TransitionsObject.yy",},
