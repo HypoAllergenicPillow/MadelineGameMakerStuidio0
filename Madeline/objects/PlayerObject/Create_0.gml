@@ -13,7 +13,7 @@ inventory_rows = 1;
 row_length = 12;
 total_inventory = inventory_rows*row_length;
 inventory = array_create(total_inventory); // Create a dictionary for the player inventory
-for(i=0;i<total_inventory;++i){instance_create_layer(0,0,"UI",SlotObject);}
+for(i=0;i<total_inventory;++i){inventory[i]=instance_create_layer(0,0,"UI",SlotObject);}
 inventory_swap_objects = instance_create_layer(0,0,"UI",SlotObject);
 
 function add_to_inventory(item) {
