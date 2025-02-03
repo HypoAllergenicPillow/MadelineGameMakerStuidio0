@@ -11,15 +11,9 @@ inventory_height = inventory_end_y - inventory_start_y
 
 function swap(){
 	if(mouse_check_button(mb_left)){
-		top_left_corner_x = parent.x - (inventory_width/2);
-		top_left_corner_y = parent.y +(inventory_height/2);
-		var relative_x = (view_xview[0]-mouse_x)-top_left_corner_x;
-		var relative_y = (view_yview[0]-mouse_y)-top_left_corner_y;
-		show_debug_message($"RelativeX: {relative_x}")
-		show_debug_message($"RelativeY: {relative_y}")
-		show_debug_message($"MouseX: {mouse_x}")
-		show_debug_message($"MouseY: {mouse_y}")
-		if((top_left_corner_x <= relative_x && relative_x <= top_left_corner_x + inventory_width)&&((top_left_corner_y <= relative_y && relative_y <= top_left_corner_y - inventory_height))){
+		var relative_x = (camera_get_view_x(view_camera[0])-mouse_x)-inventory_start_x;
+		var relative_y = (camera_get_view_y(view_camera[0])-mouse_y)-inventory_start_y;
+		if((0 <= relative_x && relative_x <= inventory_width)&&((0 <= relative_y && relative_y <= inventory_height))){
 			var index = relative_y/64
 			index += relative_x/64
 			show_debug_message(index);
