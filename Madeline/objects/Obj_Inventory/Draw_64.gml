@@ -18,7 +18,6 @@ for(var i=1; i<=global.max_inventory_rows;++i){
 	current_y_position += sprite_get_height(SPRInventory);
 }
 if(selected_asset != ""){
-	show_debug_message(selected_asset)
 	var relative_x = -((camera_get_view_x(view_camera[0])-mouse_x));
 	var relative_y = -((camera_get_view_y(view_camera[0])-mouse_y));
 	draw_sprite_ext(asset_get_index(selected_asset),0,relative_x, relative_y,1,1,0,c_white,1);
