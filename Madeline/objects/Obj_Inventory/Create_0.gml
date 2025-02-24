@@ -19,10 +19,10 @@ function get_inventory_index(){
 	return(index);
 }
 function insert_item(index){
-	if(parent.inventory[index].name != ""){
-		with(parent.inventory_swap_object.slot){copy(parent.inventory[index]);}
-	}
-	with(parent.inventory[index]){copy(inventory_swap_object.slot);}
+	
+	parent.inventory[index].name = parent.inventory_swap_object.slot.name;
+	parent.inventory[index].amount = parent.inventory_swap_object.slot.amount;
+	parent.inventory[index].durability = parent.inventory_swap_object.slot.durability;
 	with(parent.inventory_swap_object.slot){instance_reset();}
 	parent.inventory_swap_object.origonal_slot = -1;
 }
@@ -32,15 +32,26 @@ function swap(){
 		var index = get_inventory_index(); 
 		if (index != -1 && parent.inventory[index].name != ""){
 				selected_asset = (parent.inventory[index].name + "Sprite");
-				with(parent.inventory_swap_object.slot){copy(parent.inventory[index]);}
+				parent.inventory_swap_object.slot.name = parent.inventory[index].name;
+				parent.inventory_swap_object.slot.amount = parent.inventory[index].amount;
+				parent.inventory_swap_object.slot.durability = parent.inventory[index].durability;
 				parent.inventory_swap_object.origonal_slot = index;
 				with(parent.inventory[index]){instance_reset();}
 		}
 	}
 	if(mouse_check_button_released(mb_left) && selected_asset != ""){
 		var index = get_inventory_index();
-		if(index != -1){
-			insert_item(index);
+		if(0<=index && index<slots_per_row*parent.unlocked_rows){
+			if(parent.inventory[index].name == ""){
+			insert_item(index);	
+			}else{
+				parent.inventory[parent.inventory_swap_object.origonal_slot].name = parent.inventory[index].name;
+				parent.inventory[parent.inventory_swap_object.origonal_slot].amount = parent.inventory[index].amount;
+				parent.inventory[parent.inventory_swap_object.origonal_slot].durability = parent.inventory[index].durability;
+				insert_item(index);
+			}
+		}else{
+			insert_item(parent.inventory_swap_object.origonal_slot);
 		}
 		selected_asset="";
 	}
