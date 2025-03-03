@@ -10,9 +10,15 @@ for(var i=1; i<=global.max_inventory_rows;++i){
 		}
 		if(current_item + 1 < array_length(parent.inventory) && parent.inventory[current_item].name!=""){
 			var sprite_name = parent.inventory[current_item].name + "Sprite";
-			draw_sprite_ext(asset_get_index(sprite_name),0,current_x_position+32,current_y_position+32,1,1,0,c_white,1);
+			var object_width = sprite_get_width(asset_get_index(sprite_name));
+			var object_height = sprite_get_height(asset_get_index(sprite_name));
+			var functional_size = object_width > object_height?object_width:object_height;
+			var inventory_size = sprite_get_width(asset_get_index("SPRInventory"));
+			var ratio = inventory_size/functional_size;
+			draw_sprite_ext(asset_get_index(sprite_name),0,current_x_position+32,current_y_position+32,ratio,ratio,0,c_white,1);
 			if(parent.inventory[current_item].amount>1){
-				draw_text(current_x_position+32,current_y_position+32,parent.inventory[current_item].amount);
+				draw_set_font(ft_inventory);
+				draw_text_color(current_x_position+38,current_y_position+43,parent.inventory[current_item].amount,c_black,c_black,c_black,c_black,1);
 			}
 		}
 		current_x_position += sprite_get_width(SPRInventory);

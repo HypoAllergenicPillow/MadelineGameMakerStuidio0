@@ -34,6 +34,7 @@
   },
   "name":"Madeline",
   "resources":[
+    {"id":{"name":"ft_inventory","path":"fonts/ft_inventory/ft_inventory.yy",},},
     {"id":{"name":"BorderObject","path":"objects/BorderObject/BorderObject.yy",},},
     {"id":{"name":"CameraObject","path":"objects/CameraObject/CameraObject.yy",},},
     {"id":{"name":"ColisionObjects","path":"objects/ColisionObjects/ColisionObjects.yy",},},
