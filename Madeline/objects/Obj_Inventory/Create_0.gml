@@ -56,3 +56,23 @@ function swap(){
 		selected_asset="";
 	}
 }
+
+function drop(slot_object) {
+	var viewport_width = display_get_width();
+	var viewport_height = display_get_height();
+	var viewport_size = viewport_width<viewport_height?viewport_width:viewport_height;
+	viewport_size/=3;
+	var object_width = sprite_get_width(asset_get_index(SlotObject.name));
+	var object_height = sprite_get_height(asset_get_index(SlotObject.name));
+	var object_size = object_width>object_height?object_width:object_height;
+	var grid_count = floor(viewport_size/object_size)+2;
+	if(grid_count>3){
+		var grid = ds_grid_create(grid_count,grid_count);
+		mp_grid_add_instances(grid,ColisionObjects,false);
+		mp_grid_add_
+		var path=path_add();
+		mp_grid_path(grid,path,parent.x,parent.y,parent.x-(grid_count/2*object_size)+object_size/2,parent.y-(grid_count/2*object_size)+object_size/2,true);
+	}else{
+		
+	}
+}

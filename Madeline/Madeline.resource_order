@@ -23,7 +23,7 @@
     {"name":"GroundObject","order":1,"path":"objects/GroundObject/GroundObject.yy",},
     {"name":"GroundObject2","order":12,"path":"objects/GroundObject2/GroundObject2.yy",},
     {"name":"GroundObject3","order":13,"path":"objects/GroundObject3/GroundObject3.yy",},
-    {"name":"ItemObjects","order":8,"path":"objects/ItemObjects/ItemObjects.yy",},
+    {"name":"ItemObject","order":17,"path":"objects/ItemObject/ItemObject.yy",},
     {"name":"Obj_Inventory","order":15,"path":"objects/Obj_Inventory/Obj_Inventory.yy",},
     {"name":"rockObject","order":9,"path":"objects/rockObject/rockObject.yy",},
     {"name":"SlotObject","order":16,"path":"objects/SlotObject/SlotObject.yy",},

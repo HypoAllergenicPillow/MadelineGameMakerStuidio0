@@ -7,6 +7,8 @@
 #macro KEY_INTERACT keyboard_check(ord("E"))
 var key_interact_name = "E";
 
+#macro KEY_DROP keyboard_check(ord(drop_button))
+
 #macro KEY_INVENTORY vk_tab
 if(keyboard_check_pressed(KEY_INVENTORY)){
 inventory_visible = !inventory_visible;

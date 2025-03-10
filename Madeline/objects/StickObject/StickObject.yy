@@ -12,8 +12,8 @@
     "path":"folders/Objects.yy",
   },
   "parentObjectId":{
-    "name":"ItemObjects",
-    "path":"objects/ItemObjects/ItemObjects.yy",
+    "name":"ItemObject",
+    "path":"objects/ItemObject/ItemObject.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,

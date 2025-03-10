@@ -42,7 +42,7 @@
     {"id":{"name":"GroundObject","path":"objects/GroundObject/GroundObject.yy",},},
     {"id":{"name":"GroundObject2","path":"objects/GroundObject2/GroundObject2.yy",},},
     {"id":{"name":"GroundObject3","path":"objects/GroundObject3/GroundObject3.yy",},},
-    {"id":{"name":"ItemObjects","path":"objects/ItemObjects/ItemObjects.yy",},},
+    {"id":{"name":"ItemObject","path":"objects/ItemObject/ItemObject.yy",},},
     {"id":{"name":"Obj_Inventory","path":"objects/Obj_Inventory/Obj_Inventory.yy",},},
     {"id":{"name":"PlayerObject","path":"objects/PlayerObject/PlayerObject.yy",},},
     {"id":{"name":"rockObject","path":"objects/rockObject/rockObject.yy",},},
