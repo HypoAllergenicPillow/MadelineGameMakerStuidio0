@@ -56,22 +56,54 @@ function swap(){
 		selected_asset="";
 	}
 }
+function grid_distance(center,goal,grid_size){
+	var difference = center-goal;
+	if(abs(difference)==1){
+		var distance = grid_size/2;
+		return((center-distance)*difference);
+	}else{
+		var distance = abs(difference)*grid_size-grid_size/2;
+		return((center-distance)*(differnce>0?1:-1));
+	}
+}
 
 function drop(slot_object) {
 	var viewport_width = display_get_width();
 	var viewport_height = display_get_height();
 	var viewport_size = viewport_width<viewport_height?viewport_width:viewport_height;
 	viewport_size/=3;
-	var object_width = sprite_get_width(asset_get_index(SlotObject.name));
-	var object_height = sprite_get_height(asset_get_index(SlotObject.name));
+	var object_width = sprite_get_width(asset_get_index(SlotObject.name + "Sprite"));
+	var object_height = sprite_get_height(asset_get_index(SlotObject.name + "Sprite"));
 	var object_size = object_width>object_height?object_width:object_height;
 	var grid_count = floor(viewport_size/object_size)+2;
 	if(grid_count>3){
 		var grid = ds_grid_create(grid_count,grid_count);
-		mp_grid_add_instances(grid,ColisionObjects,false);
-		mp_grid_add_
+		mp_grid_add_instances(grid,ColisionObjects,true);
+		mp_grid_add_instances(grid,ItemObject,true);
 		var path=path_add();
-		mp_grid_path(grid,path,parent.x,parent.y,parent.x-(grid_count/2*object_size)+object_size/2,parent.y-(grid_count/2*object_size)+object_size/2,true);
+		var center = ((grid_count+1)/2);
+		//mp_grid_path(grid,path,parent.x,parent.y,parent.x-(grid_count/2*object_size)+object_size/2,parent.y-(grid_count/2*object_size)+object_size/2,true);
+		for(var i=1;i<grid_count-1;++i){
+			for(var j=1; j<grid_count-1;++j){
+				if(mp_grid_get_cell(grid,i,j)==0){//this means this cell is empty
+					mp_grid_add_cell(grid,i,j);//mark cell as occupied
+					for(var k=0;k<grid_count;++k){
+						for(var l=0;l<grid_count;++l){
+							if((k==0||k==grid_count-1)||(l==0||l==grid_count-1)){
+								var x_distance = grid_distance(center,k,grid_size);
+								var y_distance = grid_distance(center,l,grid_size);
+								//return using x & y distance
+								if(mp_grid_path(grid,path,parent.x,parent.y,parent.x-x_distance,parent.y-y_distance,true)){
+									show_debug_message("path_found");
+									return;
+								}
+								mp_grid_clear_cell(grid,i,j)
+							}
+						}
+					}
+				}
+			}
+		}
 	}else{
 		
 	}

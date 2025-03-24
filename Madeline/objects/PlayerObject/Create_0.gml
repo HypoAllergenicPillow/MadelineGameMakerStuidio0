@@ -1,3 +1,5 @@
+
+
 inventory_display = instance_create_layer(0,0,"UI",Obj_Inventory,{parent : id});
 instance_deactivate_object(inventory_display);
 
@@ -36,13 +38,5 @@ function add_to_inventory(item) {
 
 inventory_visible = false;
 
-function drop_item(){
-	if(KEY_DROP){
-		if(inventory_visible&&inventory_display.selected_asset != ""){
-				
-		}
-		//TODO add hot bar logic
-	}
-}
 
 instance_create_layer(x,y,"EntityLayer",CameraObject);

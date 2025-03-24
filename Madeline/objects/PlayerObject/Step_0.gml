@@ -40,7 +40,7 @@ y+= _vertical_change;
 
 // Step Event of obj_player
 
-var nearestItem = instance_nearest(x, y, ItemObjects);
+var nearestItem = instance_nearest(x, y, ItemObject);
 if (nearestItem != noone) { // Item found
     if (point_distance(x, y, nearestItem.x, nearestItem.y) <= interactionDistance) {
         // Check for interaction
@@ -53,3 +53,11 @@ if (nearestItem != noone) { // Item found
         }
     }
 }
+
+if(KEY_DROP){
+	show_debug_message("uyugvhhvj")
+		if(inventory_visible&&inventory_display.selected_asset != ""){
+				inventory_display.drop(inventory_swap_object);//called drop function
+		}
+		//TODO add hot bar logic
+	}
