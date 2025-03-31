@@ -1,3 +1,5 @@
+selected_asset = instance_create_layer(0,0,"EntityLayer",SlotObject);
+
 if(!parent||parent.object_index!=PlayerObject){
 	show_debug_message("Error no provided parent for Obj_Inventory");
 	game_end(1)
@@ -31,7 +33,9 @@ function swap(){
 	if(mouse_check_button_pressed(mb_left)){
 		var index = get_inventory_index(); 
 		if (index != -1 && parent.inventory[index].name != ""){
-				selected_asset = (parent.inventory[index].name + "Sprite");
+				selected_asset.name = (parent.inventory[index].name + "Sprite");
+				selected_asset.durability = (parent.inventory[index].durability);
+				selected_asset.amount = (parent.inventory[index].amount);
 				parent.inventory_swap_object.slot.name = parent.inventory[index].name;
 				parent.inventory_swap_object.slot.amount = parent.inventory[index].amount;
 				parent.inventory_swap_object.slot.durability = parent.inventory[index].durability;
@@ -39,7 +43,7 @@ function swap(){
 				with(parent.inventory[index]){instance_reset();}
 		}
 	}
-	if(mouse_check_button_released(mb_left) && selected_asset != ""){
+	if(mouse_check_button_released(mb_left) && selected_asset.name != ""){
 		var index = get_inventory_index();
 		if(0<=index && index<slots_per_row*parent.unlocked_rows){
 			if(parent.inventory[index].name == ""){
@@ -53,7 +57,9 @@ function swap(){
 		}else{
 			insert_item(parent.inventory_swap_object.origonal_slot);
 		}
-		selected_asset="";
+		selected_asset.name="";
+		selected_asset.durability=0;
+		selected_asset.amount=0;
 	}
 }
 function grid_distance(center,goal,grid_size){
@@ -63,7 +69,7 @@ function grid_distance(center,goal,grid_size){
 		return((center-distance)*difference);
 	}else{
 		var distance = abs(difference)*grid_size-grid_size/2;
-		return((center-distance)*(differnce>0?1:-1));
+		return((center-distance)*(difference>0?1:-1));
 	}
 }
 
@@ -72,8 +78,9 @@ function drop(slot_object) {
 	var viewport_height = display_get_height();
 	var viewport_size = viewport_width<viewport_height?viewport_width:viewport_height;
 	viewport_size/=3;
-	var object_width = sprite_get_width(asset_get_index(SlotObject.name + "Sprite"));
-	var object_height = sprite_get_height(asset_get_index(SlotObject.name + "Sprite"));
+	var instance = asset_get_index(SlotObject.name);
+	var object_width = sprite_get_width(instance);
+	var object_height = sprite_get_height(instance);
 	var object_size = object_width>object_height?object_width:object_height;
 	var grid_count = floor(viewport_size/object_size)+2;
 	if(grid_count>3){
@@ -86,12 +93,14 @@ function drop(slot_object) {
 		for(var i=1;i<grid_count-1;++i){
 			for(var j=1; j<grid_count-1;++j){
 				if(mp_grid_get_cell(grid,i,j)==0){//this means this cell is empty
+					show_debug_message($"square {i},{j} is empty")
 					mp_grid_add_cell(grid,i,j);//mark cell as occupied
 					for(var k=0;k<grid_count;++k){
 						for(var l=0;l<grid_count;++l){
 							if((k==0||k==grid_count-1)||(l==0||l==grid_count-1)){
-								var x_distance = grid_distance(center,k,grid_size);
-								var y_distance = grid_distance(center,l,grid_size);
+								var x_distance = grid_distance(center,k,object_size);
+								var y_distance = grid_distance(center,l,object_size);
+								show_debug_message($"checking square at {k} and {l} distance from player {x_distance}, {y_distance}");
 								//return using x & y distance
 								if(mp_grid_path(grid,path,parent.x,parent.y,parent.x-x_distance,parent.y-y_distance,true)){
 									show_debug_message("path_found");
@@ -105,6 +114,6 @@ function drop(slot_object) {
 			}
 		}
 	}else{
-		
+	 show_debug_message("grid_count<3")
 	}
 }

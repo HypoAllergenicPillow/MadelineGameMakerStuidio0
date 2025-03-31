@@ -55,9 +55,8 @@ if (nearestItem != noone) { // Item found
 }
 
 if(KEY_DROP){
-	show_debug_message("uyugvhhvj")
-		if(inventory_visible&&inventory_display.selected_asset != ""){
-				inventory_display.drop(inventory_swap_object);//called drop function
+	if(inventory_visible&&inventory_display.selected_asset != ""){
+				inventory_display.drop(inventory_display.selected_asset);//called drop function
 		}
 		//TODO add hot bar logic
 	}
