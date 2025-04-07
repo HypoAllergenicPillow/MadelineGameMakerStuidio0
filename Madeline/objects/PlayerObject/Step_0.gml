@@ -55,7 +55,7 @@ if (nearestItem != noone) { // Item found
 }
 
 if(KEY_DROP){
-	if(inventory_visible&&inventory_display.selected_asset != ""){
+	if(inventory_visible&&inventory_display.selected_asset.name != ""){
 				inventory_display.drop(inventory_display.selected_asset);//called drop function
 		}
 		//TODO add hot bar logic

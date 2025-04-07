@@ -74,11 +74,13 @@ function grid_distance(center,goal,grid_size){
 }
 
 function drop(slot_object) {
+	var temp_object = instance_create_layer(0,0,"EntityLayer",SlotObject,{name:slot_object.name,amount:slot_object.amount,durability:slot_object.durability});
+	slot_object.instance_reset();
 	var viewport_width = display_get_width();
 	var viewport_height = display_get_height();
 	var viewport_size = viewport_width<viewport_height?viewport_width:viewport_height;
 	viewport_size/=3;
-	var instance = asset_get_index(SlotObject.name);
+	var instance = asset_get_index(temp_object.name);
 	var object_width = sprite_get_width(instance);
 	var object_height = sprite_get_height(instance);
 	var object_size = object_width>object_height?object_width:object_height;
