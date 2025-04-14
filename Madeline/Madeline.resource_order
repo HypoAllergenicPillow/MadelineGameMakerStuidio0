@@ -29,6 +29,7 @@
     {"name":"SlotObject","order":16,"path":"objects/SlotObject/SlotObject.yy",},
     {"name":"SpawnObject","order":7,"path":"objects/SpawnObject/SpawnObject.yy",},
     {"name":"stickObject","order":10,"path":"objects/stickObject/stickObject.yy",},
+    {"name":"TeleportObject","order":18,"path":"objects/TeleportObject/TeleportObject.yy",},
     {"name":"TransitionsObject","order":6,"path":"objects/TransitionsObject/TransitionsObject.yy",},
     {"name":"TreeObject","order":11,"path":"objects/TreeObject/TreeObject.yy",},
     {"name":"WaterObject","order":3,"path":"objects/WaterObject/WaterObject.yy",},

@@ -1,20 +1,15 @@
 {
   "$GMObject":"",
-  "%Name":"TransitionsObject",
-  "eventList":[
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-  ],
+  "%Name":"TeleportObject",
+  "eventList":[],
   "managed":true,
-  "name":"TransitionsObject",
+  "name":"TeleportObject",
   "overriddenProperties":[],
   "parent":{
     "name":"Objects",
     "path":"folders/Objects.yy",
   },
-  "parentObjectId":{
-    "name":"TeleportObject",
-    "path":"objects/TeleportObject/TeleportObject.yy",
-  },
+  "parentObjectId":null,
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -32,10 +27,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"TransitionSprite",
-    "path":"sprites/TransitionSprite/TransitionSprite.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
   "visible":true,
 }

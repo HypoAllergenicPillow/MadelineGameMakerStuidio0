@@ -49,6 +49,7 @@
     {"id":{"name":"SlotObject","path":"objects/SlotObject/SlotObject.yy",},},
     {"id":{"name":"SpawnObject","path":"objects/SpawnObject/SpawnObject.yy",},},
     {"id":{"name":"stickObject","path":"objects/stickObject/stickObject.yy",},},
+    {"id":{"name":"TeleportObject","path":"objects/TeleportObject/TeleportObject.yy",},},
     {"id":{"name":"TransitionsObject","path":"objects/TransitionsObject/TransitionsObject.yy",},},
     {"id":{"name":"TreeObject","path":"objects/TreeObject/TreeObject.yy",},},
     {"id":{"name":"WaterObject","path":"objects/WaterObject/WaterObject.yy",},},

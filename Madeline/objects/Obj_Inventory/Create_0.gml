@@ -86,15 +86,38 @@ function drop(slot_object) {
 	var object_size = object_width>object_height?object_width:object_height;
 	var grid_count = floor(viewport_size/object_size)+2;
 	if(grid_count>3){
+		show_debug_message("Grid Count is greater than 3");
 		var grid = ds_grid_create(grid_count,grid_count);
-		mp_grid_add_instances(grid,ColisionObjects,true);
-		mp_grid_add_instances(grid,ItemObject,true);
+		var center_cell_x = floor(parent.x/object_size);
+		var center_cell_y = floor(parent.y/object_size);
+		for(var i=0;i<grid_count;++i){
+			for(var j=0; j<grid_count;++j){
+				var cell_x = center_cell_x + i;
+				var cell_y = center_cell_y + j;
+				var world_x = cell_x*object_size + (object_size/2);
+				var world_y = cell_y*object_size + (object_size/2);
+				var occupied = 1;//grid value of 1 indicated that this space is occupied
+					if(collision_rectangle(world_x-object_size/2,world_y-object_size/2,world_x+object_size/2,world_y+object_size/2,ColisionObjects,false,true)==noone){						
+						if(collision_rectangle(world_x-object_size/2,world_y-object_size/2,world_x+object_size/2,world_y+object_size/2,ItemObject,false,true)==noone){
+							if(collision_rectangle(world_x-object_size/2,world_y-object_size/2,world_x+object_size/2,world_y+object_size/2,PlayerObject,false,true)==noone){
+								if(collision_rectangle(world_x-object_size/2,world_y-object_size/2,world_x+object_size/2,world_y+object_size/2,TeleportObject,false,true)==noone){
+									show_debug_message($"square {i},{j} is empty");
+									occupied = 0;
+									mp_grid_clear_cell(grid,i,j);
+								}
+							}
+						}
+
+					}
+					if(occupied==1){mp_grid_add_cell(grid,i,j);}
+				}
+		}
 		var path=path_add();
 		var center = ((grid_count+1)/2);
 		//mp_grid_path(grid,path,parent.x,parent.y,parent.x-(grid_count/2*object_size)+object_size/2,parent.y-(grid_count/2*object_size)+object_size/2,true);
 		for(var i=1;i<grid_count-1;++i){
 			for(var j=1; j<grid_count-1;++j){
-				if(mp_grid_get_cell(grid,i,j)==0){//this means this cell is empty
+				if(!mp_grid_get_cell(grid,i,j)){//this means this cell is empty
 					show_debug_message($"square {i},{j} is empty")
 					mp_grid_add_cell(grid,i,j);//mark cell as occupied
 					for(var k=0;k<grid_count;++k){
