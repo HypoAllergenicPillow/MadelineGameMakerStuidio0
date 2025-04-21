@@ -112,25 +112,36 @@ function drop(slot_object) {
 					if(occupied==1){mp_grid_add_cell(grid,i,j);}
 				}
 		}
-		var path=path_add();
 		var center = ((grid_count+1)/2);
 		//mp_grid_path(grid,path,parent.x,parent.y,parent.x-(grid_count/2*object_size)+object_size/2,parent.y-(grid_count/2*object_size)+object_size/2,true);
 		for(var i=1;i<grid_count-1;++i){
 			for(var j=1; j<grid_count-1;++j){
 				if(!mp_grid_get_cell(grid,i,j)){//this means this cell is empty
-					show_debug_message($"square {i},{j} is empty")
+					//show_debug_message($"square {i},{j} is empty"
+					var sprite_x = center_cell_x + i;
+					var sprite_y = center_cell_y + j;
+					var sprite_x = sprite_x*object_size+(object_size/2);
+					var sprite_y = sprite_y*object_size+(object_size/2);
+					draw_sprite_ext(EmptySprite,0,sprite_x,sprite_y,1,1,0,c_white,0.5);
 					mp_grid_add_cell(grid,i,j);//mark cell as occupied
 					for(var k=0;k<grid_count;++k){
 						for(var l=0;l<grid_count;++l){
 							if((k==0||k==grid_count-1)||(l==0||l==grid_count-1)){
-								var x_distance = grid_distance(center,k,object_size);
-								var y_distance = grid_distance(center,l,object_size);
-								show_debug_message($"checking square at {k} and {l} distance from player {x_distance}, {y_distance}");
+								var x_distance = center_cell_x + k;
+								var y_distance = center_cell_y + l;
+								var x_distance = x_distance*object_size+(object_size/2);
+								var y_distance = y_distance*object_size+(object_size/2);
+								//show_debug_message($"checking square at {k} and {l} distance from player {x_distance}, {y_distance}");
 								//return using x & y distance
+								var path=path_add();
 								if(mp_grid_path(grid,path,parent.x,parent.y,parent.x-x_distance,parent.y-y_distance,true)){
 									show_debug_message("path_found");
+									var object = string_copy(temp_object.name,1,string_length(temp_object.name)-6);
+									instance_create_layer(x_distance,y_distance,"EntityLayer",asset_get_index(object+"Object"));
 									return;
 								}
+								draw_path(path,parent.x,parent.y,1);
+								
 								mp_grid_clear_cell(grid,i,j)
 							}
 						}
