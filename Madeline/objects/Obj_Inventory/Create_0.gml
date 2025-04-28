@@ -92,6 +92,10 @@ function drop(slot_object) {
     
     if (grid_count <= 3) {
         show_debug_message("Grid too small to drop item safely.");
+		slot_object.name = temp_object.name;
+		slot_object.amount = temp_object.amount;
+		slot_object.durability = temp_object.durability;
+		instance_destroy(temp_object);
         return;
     }
     
@@ -161,4 +165,8 @@ function drop(slot_object) {
     // Fallback if nothing could be dropped
     show_debug_message("No safe space to drop item.");
     ds_grid_destroy(grid);
+	slot_object.name = temp_object.name;
+	slot_object.amount = temp_object.amount;
+	slot_object.durability = temp_object.durability;
+	instance_destroy(temp_object);
 }
