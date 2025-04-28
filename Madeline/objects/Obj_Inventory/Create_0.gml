@@ -74,82 +74,91 @@ function grid_distance(center,goal,grid_size){
 }
 
 function drop(slot_object) {
-	var temp_object = instance_create_layer(0,0,"EntityLayer",SlotObject,{name:slot_object.name,amount:slot_object.amount,durability:slot_object.durability});
-	slot_object.instance_reset();
-	var viewport_width = display_get_width();
-	var viewport_height = display_get_height();
-	var viewport_size = viewport_width<viewport_height?viewport_width:viewport_height;
-	viewport_size/=3;
-	var instance = asset_get_index(temp_object.name);
-	var object_width = sprite_get_width(instance);
-	var object_height = sprite_get_height(instance);
-	var object_size = object_width>object_height?object_width:object_height;
-	var grid_count = floor(viewport_size/object_size)+2;
-	if(grid_count>3){
-		show_debug_message("Grid Count is greater than 3");
-		var grid = ds_grid_create(grid_count,grid_count);
-		var center_cell_x = floor(parent.x/object_size);
-		var center_cell_y = floor(parent.y/object_size);
-		for(var i=0;i<grid_count;++i){
-			for(var j=0; j<grid_count;++j){
-				var cell_x = center_cell_x + i;
-				var cell_y = center_cell_y + j;
-				var world_x = cell_x*object_size + (object_size/2);
-				var world_y = cell_y*object_size + (object_size/2);
-				var occupied = 1;//grid value of 1 indicated that this space is occupied
-					if(collision_rectangle(world_x-object_size/2,world_y-object_size/2,world_x+object_size/2,world_y+object_size/2,ColisionObjects,false,true)==noone){						
-						if(collision_rectangle(world_x-object_size/2,world_y-object_size/2,world_x+object_size/2,world_y+object_size/2,ItemObject,false,true)==noone){
-							if(collision_rectangle(world_x-object_size/2,world_y-object_size/2,world_x+object_size/2,world_y+object_size/2,PlayerObject,false,true)==noone){
-								if(collision_rectangle(world_x-object_size/2,world_y-object_size/2,world_x+object_size/2,world_y+object_size/2,TeleportObject,false,true)==noone){
-									show_debug_message($"square {i},{j} is empty");
-									occupied = 0;
-									mp_grid_clear_cell(grid,i,j);
-								}
-							}
-						}
+    var temp_object = instance_create_layer(0, 0, "EntityLayer", SlotObject, {
+        name: slot_object.name,
+        amount: slot_object.amount,
+        durability: slot_object.durability
+    });
+    
+    slot_object.instance_reset();
+    
+    var instance_sprite = asset_get_index(temp_object.name);
+    var object_width = sprite_get_width(instance_sprite);
+    var object_height = sprite_get_height(instance_sprite);
+    var object_size = max(object_width, object_height);
+    
+    var viewport_size = min(display_get_width(), display_get_height()) / 3;
+    var grid_count = floor(viewport_size / object_size) + 2;
+    
+    if (grid_count <= 3) {
+        show_debug_message("Grid too small to drop item safely.");
+        return;
+    }
+    
+    show_debug_message("Grid Count: " + string(grid_count));
+    
+    var grid = ds_grid_create(grid_count, grid_count);
+    ds_grid_set_region(grid, 0, 0, grid_count - 1, grid_count - 1, 1); // all occupied initially
 
-					}
-					if(occupied==1){mp_grid_add_cell(grid,i,j);}
-				}
-		}
-		var center = ((grid_count+1)/2);
-		//mp_grid_path(grid,path,parent.x,parent.y,parent.x-(grid_count/2*object_size)+object_size/2,parent.y-(grid_count/2*object_size)+object_size/2,true);
-		for(var i=1;i<grid_count-1;++i){
-			for(var j=1; j<grid_count-1;++j){
-				if(!mp_grid_get_cell(grid,i,j)){//this means this cell is empty
-					//show_debug_message($"square {i},{j} is empty"
-					var sprite_x = center_cell_x + i;
-					var sprite_y = center_cell_y + j;
-					var sprite_x = sprite_x*object_size+(object_size/2);
-					var sprite_y = sprite_y*object_size+(object_size/2);
-					draw_sprite_ext(EmptySprite,0,sprite_x,sprite_y,1,1,0,c_white,0.5);
-					mp_grid_add_cell(grid,i,j);//mark cell as occupied
-					for(var k=0;k<grid_count;++k){
-						for(var l=0;l<grid_count;++l){
-							if((k==0||k==grid_count-1)||(l==0||l==grid_count-1)){
-								var x_distance = center_cell_x + k;
-								var y_distance = center_cell_y + l;
-								var x_distance = x_distance*object_size+(object_size/2);
-								var y_distance = y_distance*object_size+(object_size/2);
-								//show_debug_message($"checking square at {k} and {l} distance from player {x_distance}, {y_distance}");
-								//return using x & y distance
-								var path=path_add();
-								if(mp_grid_path(grid,path,parent.x,parent.y,parent.x-x_distance,parent.y-y_distance,true)){
-									show_debug_message("path_found");
-									var object = string_copy(temp_object.name,1,string_length(temp_object.name)-6);
-									instance_create_layer(x_distance,y_distance,"EntityLayer",asset_get_index(object+"Object"));
-									return;
-								}
-								draw_path(path,parent.x,parent.y,1);
-								
-								mp_grid_clear_cell(grid,i,j)
-							}
-						}
-					}
-				}
-			}
-		}
-	}else{
-	 show_debug_message("grid_count<3")
-	}
+    var center_cell_x = floor(parent.x / object_size);
+    var center_cell_y = floor(parent.y / object_size);
+
+    // Find open cells
+    for (var i = 0; i < grid_count; ++i) {
+        for (var j = 0; j < grid_count; ++j) {
+            var cell_x = center_cell_x + i;
+            var cell_y = center_cell_y + j;
+            var world_x = cell_x * object_size + (object_size / 2);
+            var world_y = cell_y * object_size + (object_size / 2);
+            
+            if (
+                collision_rectangle(world_x - object_size / 2, world_y - object_size / 2, world_x + object_size / 2, world_y + object_size / 2, ColisionObjects, false, true) == noone &&
+                collision_rectangle(world_x - object_size / 2, world_y - object_size / 2, world_x + object_size / 2, world_y + object_size / 2, ItemObject, false, true) == noone &&
+                collision_rectangle(world_x - object_size / 2, world_y - object_size / 2, world_x + object_size / 2, world_y + object_size / 2, PlayerObject, false, true) == noone &&
+                collision_rectangle(world_x - object_size / 2, world_y - object_size / 2, world_x + object_size / 2, world_y + object_size / 2, TeleportObject, false, true) == noone
+            ) {
+                ds_grid_set(grid, i, j, 0); // mark cell free
+            }
+        }
+    }
+
+    // Spiral outward search
+    for (var radius = 1; radius <= (grid_count div 2); ++radius) {
+        for (var i = center_cell_x - radius; i <= center_cell_x + radius; ++i) {
+            for (var j = center_cell_y - radius; j <= center_cell_y + radius; ++j) {
+                var grid_x = i - center_cell_x + (grid_count div 2);
+                var grid_y = j - center_cell_y + (grid_count div 2);
+                
+                if (grid_x >= 0 && grid_x < grid_count && grid_y >= 0 && grid_y < grid_count) {
+                    if (ds_grid_get(grid, grid_x, grid_y) == 0) {
+                        
+                        var drop_x = i * object_size + (object_size / 2);
+                        var drop_y = j * object_size + (object_size / 2);
+                        
+                        // FINAL collision check before creating
+                        if (
+                            collision_rectangle(drop_x - object_size / 2, drop_y - object_size / 2, drop_x + object_size / 2, drop_y + object_size / 2, ColisionObjects, false, true) == noone &&
+                            collision_rectangle(drop_x - object_size / 2, drop_y - object_size / 2, drop_x + object_size / 2, drop_y + object_size / 2, ItemObject, false, true) == noone &&
+                            collision_rectangle(drop_x - object_size / 2, drop_y - object_size / 2, drop_x + object_size / 2, drop_y + object_size / 2, PlayerObject, false, true) == noone &&
+                            collision_rectangle(drop_x - object_size / 2, drop_y - object_size / 2, drop_x + object_size / 2, drop_y + object_size / 2, TeleportObject, false, true) == noone
+                        ) {
+                            var base_name = string_replace(temp_object.name, "Sprite", "");
+                            var object_name = base_name + "Object";
+                            var object_asset = asset_get_index(object_name);
+
+                            instance_create_layer(drop_x, drop_y, "EntityLayer", object_asset);
+                            
+                            ds_grid_destroy(grid);
+                            instance_destroy(temp_object);
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Fallback if nothing could be dropped
+    show_debug_message("No safe space to drop item.");
+    ds_grid_destroy(grid);
 }
