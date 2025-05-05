@@ -41,6 +41,10 @@ y+= _vertical_change;
 // Step Event of obj_player
 
 var nearestItem = instance_nearest(x, y, ItemObject);
+var nearest_slot = instance_nearest(x,y,SlotObject);
+if(distance_to_object(nearestItem)>distance_to_object(nearest_slot)){
+	nearestItem=nearest_slot
+}
 if (nearestItem != noone) { // Item found
     if (point_distance(x, y, nearestItem.x, nearestItem.y) <= interactionDistance) {
         // Check for interaction

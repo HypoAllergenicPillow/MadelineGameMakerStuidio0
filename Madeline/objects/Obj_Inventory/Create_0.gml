@@ -77,7 +77,8 @@ function drop(slot_object) {
     var temp_object = instance_create_layer(0, 0, "EntityLayer", SlotObject, {
         name: slot_object.name,
         amount: slot_object.amount,
-        durability: slot_object.durability
+        durability: slot_object.durability,
+		max_durability: slot_object.max_durability,
     });
     
     slot_object.instance_reset();
@@ -95,6 +96,7 @@ function drop(slot_object) {
 		slot_object.name = temp_object.name;
 		slot_object.amount = temp_object.amount;
 		slot_object.durability = temp_object.durability;
+		slot_object.max_durability = temp_object.max_durability;
 		instance_destroy(temp_object);
         return;
     }
@@ -146,14 +148,24 @@ function drop(slot_object) {
                             collision_rectangle(drop_x - object_size / 2, drop_y - object_size / 2, drop_x + object_size / 2, drop_y + object_size / 2, PlayerObject, false, true) == noone &&
                             collision_rectangle(drop_x - object_size / 2, drop_y - object_size / 2, drop_x + object_size / 2, drop_y + object_size / 2, TeleportObject, false, true) == noone
                         ) {
-                            var base_name = string_replace(temp_object.name, "Sprite", "");
-                            var object_name = base_name + "Object";
-                            var object_asset = asset_get_index(object_name);
-
-                            instance_create_layer(drop_x, drop_y, "EntityLayer", object_asset);
+                    
+							if(temp_object.amount>1||(temp_object.max_durability!=-1 && temp_object.durability!=temp_object.max_durability)){
+								//drop a slot object
+								temp_object.x = drop_x;
+								temp_object.y = drop_y;
+								temp_object.set_sprite();
+							}else{
+								//just drop parent object
+								var base_name = string_replace(temp_object.name, "Sprite", "");
+	                            var object_name = base_name + "Object";
+	                            var object_asset = asset_get_index(object_name);
+								instance_create_layer(drop_x, drop_y, "EntityLayer", object_asset);
+	                            instance_destroy(temp_object);
+								
+							}
+                            
                             
                             ds_grid_destroy(grid);
-                            instance_destroy(temp_object);
                             return;
                         }
                     }
@@ -168,5 +180,6 @@ function drop(slot_object) {
 	slot_object.name = temp_object.name;
 	slot_object.amount = temp_object.amount;
 	slot_object.durability = temp_object.durability;
+	slot_object.max_durability = temp_object.max_durability;
 	instance_destroy(temp_object);
 }

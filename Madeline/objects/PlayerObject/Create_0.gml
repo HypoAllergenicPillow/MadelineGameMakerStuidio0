@@ -19,21 +19,25 @@ for(i=0;i<total_inventory;++i){inventory[i]=instance_create_layer(0,0,"UI",SlotO
 inventory_swap_object = {slot:instance_create_layer(0,0,"UI",SlotObject),origonal_slot:-1};
 
 function add_to_inventory(item) {
-    for(_i = 0;_i<total_inventory; ++_i){
-		if(inventory[_i].name == item.name && inventory[_i].amount < item.stack_size){
-		inventory[_i].amount += 1;
-		inventory[_i].durability = -1;
-		show_debug_message("inventory slot; " + string(_i) + " item_name; " + inventory[_i].name + " durability; " + string(inventory[_i].durability) + " amount; " + string(inventory[_i].amount))
-		return true;
-		}
-		else if(inventory[_i].name == ""){
-		inventory[_i].name = item.name;
-		inventory[_i].amount = 1;
-		inventory[_i].durability = item.durability;
-		show_debug_message("inventory slot; " + string(_i) + " item_name; " + inventory[_i].name + " durability; " + string(inventory[_i].durability) + " amount; " + string(inventory[_i].amount))
-		return true;
-		}
-	}return false;
+	if(object_get_parent(item.object_index) == ItemObject){
+	    for(_i = 0;_i<total_inventory; ++_i){
+			if(inventory[_i].name == item.name && inventory[_i].amount < item.stack_size){
+			inventory[_i].amount += 1;
+			inventory[_i].durability = -1;
+			show_debug_message("inventory slot; " + string(_i) + " item_name; " + inventory[_i].name + " durability; " + string(inventory[_i].durability) + " amount; " + string(inventory[_i].amount))
+			return true;
+			}
+			else if(inventory[_i].name == ""){
+			inventory[_i].name = item.name;
+			inventory[_i].amount = 1;
+			inventory[_i].durability = item.durability;
+			show_debug_message("inventory slot; " + string(_i) + " item_name; " + inventory[_i].name + " durability; " + string(inventory[_i].durability) + " amount; " + string(inventory[_i].amount))
+			return true;
+			}
+		}return false;
+	}else{
+		show_debug_message("picking up slot objct")
+	}
 }
 
 inventory_visible = false;
