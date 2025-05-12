@@ -36,7 +36,34 @@ function add_to_inventory(item) {
 			}
 		}return false;
 	}else{
-		show_debug_message("picking up slot objct")
+		for(i = 0;i<total_inventory;i++){
+			if(item.name==inventory[i].name&&inventory[i].amount<inventory[i].stack_size){
+				if(item.amount + inventory[i].amount <= item.stack_size){
+					inventory[i].name = item.name;
+					inventory[i].amount = item.amount+inventory[i].amount;
+					inventory[i].durability = item.durability;
+					inventory[i].max_durability = inventory[i].max_durability;
+					inventory[i].stack_size = item.stack_size;
+					return true;
+				}else{
+					item.amount -= inventory[i].stack_size-inventory[i].amount;
+					inventory[i].amount=inventory[i].stack_size;
+					return add_to_inventory(item)
+				}
+			}else if(inventory[i].name == ""){
+				show_debug_message(item.name);
+				inventory[i].name = item.name;
+				inventory[i].amount = item.amount;
+				inventory[i].durability = item.durability;
+				inventory[i].max_durability = item.max_durability;
+				inventory[i].stack_size = item.stack_size;
+				return true;
+			}
+		}return false;
+		// Loop through inventory
+		// Add however much can fit
+		// If not all can fit, search for another spot
+		// Lastly, if no spot already holds this object, use empty slot
 	}
 }
 

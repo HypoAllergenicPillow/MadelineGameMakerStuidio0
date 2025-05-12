@@ -154,6 +154,7 @@ function drop(slot_object) {
 								temp_object.x = drop_x;
 								temp_object.y = drop_y;
 								temp_object.set_sprite();
+								temp_object.name = string_replace(temp_object.name,"Sprite","");
 							}else{
 								//just drop parent object
 								var base_name = string_replace(temp_object.name, "Sprite", "");
